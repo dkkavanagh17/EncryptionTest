@@ -12,7 +12,7 @@ public static class Encryption
 
             for (int batchIdx = 0; batchIdx < batch.Length; batchIdx++)
             {
-                batch[batchIdx] = XOR(batch[batchIdx], xorKey[batchIdx]);
+                batch[batchIdx] = XOR(batch[batchIdx], keyStream[batchIdx]);
             }
         }
 
@@ -42,7 +42,7 @@ public static class Encryption
 
         for (int i = 0; i < raisedKey.Length; i++)
         {
-            raisedKey[i] = Convert.ToInt32(Math.Pow(key[i], num)) % 256;
+            raisedKey[i] = Convert.ToInt32(Math.Pow(key[i], num) % 256);
         }
 
         return raisedKey;
