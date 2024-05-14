@@ -2,12 +2,23 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
+
         <TargetFramework>net7.0</TargetFramework>
+
         <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>true</SelfContained>
+
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <AssemblyName>XR4</AssemblyName>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Resource Include="icon.ico" />
+    </ItemGroup>
 
 </Project>

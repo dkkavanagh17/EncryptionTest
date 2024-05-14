@@ -3,9 +3,46 @@ using System.Collections.Generic;
 
 public class Program
 {
+    enum Mode
+    {
+        Encrypt,
+        Decrypt
+    }
+
+    static Mode mode;
+    static Encryption.KeyData keyData;
+    static int[] batch;
+
+
     public static void Main(string[] args)
     {
-        //Inputs
+        ConsoleStart();
+        GetInputs();
+
+        batch = Encryption.Cipher(batch, keyData);
+
+        ServeOutput();
+        EndOnLoop();
+    }
+
+
+    static void ConsoleStart()
+    {
+        Console.WriteLine("XR4 Encryption Program");
+        Console.WriteLine("v2024.05.15");
+        Console.WriteLine(new string('-', 10));
+    }
+
+
+    static void GetInputs()
+    {
+        //Mode
+        Console.WriteLine("\x1b[2m" + "mode>(e=encrypt, d=decrypt)" + "\x1b[0m");
+        Console.Write("\x1b[34m" + "mode>" + "\x1b[0m");
+        string ipt_mode = Console.ReadLine();
+        Console.CursorTop--;
+        Console.CursorLeft = 5 + ipt_mode.Length;
+        Console.WriteLine("\x1b[34m" + "<" + "\x1b[0m");
 
         //KeyData
         Console.WriteLine("\x1b[2m" + "keydata>[numCycles]:[key]" + "\x1b[0m");
@@ -13,14 +50,6 @@ public class Program
         string ipt_keydata = Console.ReadLine();
         Console.CursorTop--;
         Console.CursorLeft = 8 + ipt_keydata.Length;
-        Console.WriteLine("\x1b[34m" + "<" + "\x1b[0m");
-
-        //TextType
-        Console.WriteLine("\x1b[2m" + "mode>(e=encrypt, d=decrypt)" + "\x1b[0m");
-        Console.Write("\x1b[34m" + "mode>" + "\x1b[0m");
-        string ipt_mode = Console.ReadLine();
-        Console.CursorTop--;
-        Console.CursorLeft = 5 + ipt_mode.Length;
         Console.WriteLine("\x1b[34m" + "<" + "\x1b[0m");
 
         //Text
@@ -31,53 +60,89 @@ public class Program
         Console.WriteLine("\x1b[34m" + "<" + "\x1b[0m");
 
 
-
-        //Readbacks
-        Console.WriteLine(ipt_keydata);
-        Console.WriteLine(ipt_mode);
-        Console.WriteLine(ipt_text);
-
         //Data Parsing
-        Encryption.KeyData keydata = Encryption.ParseKey(ipt_keydata);
-
-        if (keydata == null)
+        if (ipt_mode == "e")
         {
-            LogError();
+            mode = Mode.Encrypt;
         }
-
-        string inputType;
-
-        if (ipt_mode == "h")
+        else if (ipt_mode == "d")
         {
-            inputType = "hex";
-        }
-        else if (ipt_mode == "t")
-        {
-            inputType = "text";
+            mode = Mode.Decrypt;
         }
         else
         {
-            LogError();
+            Console.WriteLine("\x1b[31m" + "invalid mode" + "\x1b[0m");
+            KillWithLoop();
         }
 
+        keyData = Encryption.ParseKey(ipt_keydata);
+        if (keyData == null)
+        {
+            Console.WriteLine("\x1b[31m" + "invalid key" + "\x1b[0m");
+            KillWithLoop();
+        }
 
-        int[] batch = Encryption.ParseBatch(ipt_text, inputType);
+        //Data Parsing
+        if (mode == Mode.Encrypt)
+        {
+            batch = Encryption.ParseBatch(ipt_text, "text");
 
-        batch = Encryption.Cipher(batch, keydata);
+            if (batch == null)
+            {
+                Console.WriteLine("\x1b[31m" + "invalid text, not ASCII" + "\x1b[0m");
+                KillWithLoop();
+            }
+        }
+        else //Mode.Decrypt
+        {
+            batch = Encryption.ParseBatch(ipt_text, "hex");
+
+            if (batch == null)
+            {
+                Console.WriteLine("\x1b[31m" + "invalid text, not hex" + "\x1b[0m");
+                KillWithLoop();
+            }
+        }
+    }
+
+
+    static void ServeOutput()
+    {
+        string data;
+
+        if (mode == Mode.Encrypt)
+        {
+            data = Encryption.BatchString(batch, "hex");
+        }
+        else //Mode.Decrypt
+        {
+            data = Encryption.BatchString(batch, "text");
+        }
 
         //Output
         Console.Write("\x1b[32m" + "output>" + "\x1b[0m");
-        Console.Write("HIIIIIIIIIIIIII");
+        Console.Write(data);
         Console.WriteLine("\x1b[32m" + "<" + "\x1b[0m");
+    }
 
 
-
-        void LogError()
+    static void KillWithLoop()
+    {
+        Console.Write("\x1b[31m" + "exit to end program" + "\x1b[0m");
+        while (true)
         {
-            Console.WriteLine("error");
-            while (true) ;
-            System.Environment.Exit(0);
+
         }
+        System.Environment.Exit(0);
+    }
+
+    static void EndOnLoop()
+    {
+        while (true)
+        {
+
+        }
+        System.Environment.Exit(0);
     }
 }
 

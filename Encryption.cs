@@ -79,7 +79,7 @@ public static class Encryption
         {
             if ((text.Length % 2) != 0)
             {
-                text += "A";
+                return null;
             }
 
             int[] batch = new int[text.Length / 2];
@@ -135,6 +135,11 @@ public static class Encryption
     public static KeyData ParseKey(string keysStr)
     {
         string[] parts = keysStr.Split(":", 2);
+
+        if (parts.Length != 2)
+        {
+            return null;
+        }
 
         int numCycles = int.Parse(parts[0]);
 
