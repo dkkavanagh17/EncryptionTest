@@ -75,7 +75,7 @@ public class Program
             KillWithLoop();
         }
 
-        keyData = Encryption.ParseKey(ipt_keydata);
+        keyData = ParseKey(ipt_keydata);
         if (keyData == null)
         {
             Console.WriteLine("\x1b[31m" + "invalid key" + "\x1b[0m");
@@ -85,7 +85,7 @@ public class Program
         //Data Parsing
         if (mode == Mode.Encrypt)
         {
-            batch = Encryption.ParseBatch(ipt_text, "text");
+            batch = ParseBatch(ipt_text, "text");
 
             if (batch == null)
             {
@@ -95,7 +95,7 @@ public class Program
         }
         else //Mode.Decrypt
         {
-            batch = Encryption.ParseBatch(ipt_text, "hex");
+            batch = ParseBatch(ipt_text, "hex");
 
             if (batch == null)
             {
@@ -112,11 +112,11 @@ public class Program
 
         if (mode == Mode.Encrypt)
         {
-            data = Encryption.BatchString(batch, "hex");
+            data = BatchString(batch, "hex");
         }
         else //Mode.Decrypt
         {
-            data = Encryption.BatchString(batch, "text");
+            data = BatchString(batch, "text");
         }
 
         //Output
@@ -143,6 +143,106 @@ public class Program
 
         }
         System.Environment.Exit(0);
+    }
+
+
+
+    //Parsing
+    public static int[] ParseBatch(string text, string mode)
+    {
+        if (mode == "text")
+        {
+            int[] batch = new int[text.Length];
+
+            for (int batchIdx = 0; batchIdx < batch.Length; batchIdx++)
+            {
+                char txtChar = text[batchIdx];
+                int asciiInt = (int)txtChar;
+                batch[batchIdx] = asciiInt;
+            }
+
+            return batch;
+        }
+        else if (mode == "hex")
+        {
+            if ((text.Length % 2) != 0)
+            {
+                return null;
+            }
+
+            int[] batch = new int[text.Length / 2];
+
+            for (int i = 0; i < batch.Length; i++)
+            {
+                int idx = 2 * i;
+                string txt = text[idx].ToString() + text[idx + 1].ToString();
+                batch[i] = Convert.ToInt32(txt, 16);
+            }
+
+            return batch;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static string BatchString(int[] batch, string mode)
+    {
+        if (mode == "text")
+        {
+            string[] data = new string[batch.Length];
+
+            for (int batchIdx = 0; batchIdx < batch.Length; batchIdx++)
+            {
+                int batchInt = batch[batchIdx];
+                char asciiChar = (char)batchInt;
+                data[batchIdx] = asciiChar.ToString();
+            }
+
+            return string.Join("", data);
+        }
+        else if (mode == "hex")
+        {
+            string[] data = new string[batch.Length];
+
+            for (int batchIdx = 0; batchIdx < batch.Length; batchIdx++)
+            {
+                int batchInt = batch[batchIdx];
+                data[batchIdx] = batchInt.ToString("X");
+            }
+
+            return string.Join("", data);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static XR4Encryption.KeyData ParseKey(string keysStr)
+    {
+        string[] parts = keysStr.Split(":", 2);
+
+        if (parts.Length != 2)
+        {
+            return null;
+        }
+
+        int numCycles = int.Parse(parts[0]);
+
+        int[] xorKey = new int[parts[1].Length];
+        for (int i = 0; i < xorKey.Length; i++)
+        {
+            char txtChar = parts[1][i];
+            xorKey[i] = (int)txtChar;
+        }
+
+        return new KeyData
+        {
+            numCycles = numCycles,
+            xorKey = xorKey
+        };
     }
 }
 
