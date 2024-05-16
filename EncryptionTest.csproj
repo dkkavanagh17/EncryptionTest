@@ -4,11 +4,12 @@
         <OutputType>Exe</OutputType>
 
         <TargetFramework>net7.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+        <PublishTrimmed>true</PublishTrimmed>
 
         <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>true</SelfContained>
-
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>

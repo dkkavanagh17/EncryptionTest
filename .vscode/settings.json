@@ -3,7 +3,7 @@
     "csharp.semanticHighlighting.enabled": true,
     "files.exclude": {
         "EncryptionTest.code-workspace": true,
-        "EncryptionTest.csproj": true,
+        "EncryptionTest.csproj": false,
         "EncryptionTest.sln": true,
     }
 }
