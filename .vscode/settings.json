@@ -5,5 +5,6 @@
         "EncryptionTest.code-workspace": true,
         "EncryptionTest.csproj": false,
         "EncryptionTest.sln": true,
-    }
+    },
+    "git.enabled": false
 }
