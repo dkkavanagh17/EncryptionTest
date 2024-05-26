@@ -1,2 +1,0 @@
-C:\Users\dkava\OneDrive\Documents\GitHub\EncryptionTest\bin\Release\net7.0\win-x64\publish\XR4.pdb
-C:\Users\dkava\OneDrive\Documents\GitHub\EncryptionTest\bin\Release\net7.0\win-x64\publish\XR4.exe

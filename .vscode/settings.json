@@ -3,8 +3,11 @@
     "csharp.semanticHighlighting.enabled": true,
     "files.exclude": {
         "EncryptionTest.code-workspace": true,
-        "EncryptionTest.csproj": false,
-        "EncryptionTest.sln": true,
+        "icon.ico": true,
+        "README.md": true,
+        "*/EncryptionTest.csproj": false,
+        "*/EncryptionTest.sln": false,
+        "*/obj": true,
     },
     "git.enabled": false
 }
