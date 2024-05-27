@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XR4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35d36b889a2fa570aafc487ed47588f8a8ab5dc4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+086de09cb4b29aabe796627e936ec3dd8344dae5")]
 [assembly: System.Reflection.AssemblyProductAttribute("XR4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XR4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -22,7 +22,7 @@ public class ConsoleApp
     static string input_data = "";
     static string output_data = "";
     static XR4.KeyData keyData;
-    static XR4 xr4;
+    static XR4v2024_05_26 xr4;
 
 
     static void StartText()

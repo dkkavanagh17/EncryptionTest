@@ -36,14 +36,15 @@ namespace WindowsForms
             tableMain = new TableLayoutPanel();
             tableRow3 = new TableLayoutPanel();
             labelError = new Label();
-            tableRow4 = new TableLayoutPanel();
-            tableRow2 = new TableLayoutPanel();
+            tableEncrypted = new TableLayoutPanel();
+            tableDecrypted = new TableLayoutPanel();
             tableRow1 = new TableLayoutPanel();
             buttonGenerateKey = new Button();
+            label1 = new Label();
             tableMain.SuspendLayout();
             tableRow3.SuspendLayout();
-            tableRow4.SuspendLayout();
-            tableRow2.SuspendLayout();
+            tableEncrypted.SuspendLayout();
+            tableDecrypted.SuspendLayout();
             tableRow1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,12 +61,13 @@ namespace WindowsForms
             // 
             // dropdownMode
             // 
-            dropdownMode.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dropdownMode.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dropdownMode.FormattingEnabled = true;
             dropdownMode.Items.AddRange(new object[] { "Encrypt", "Decrypt" });
-            dropdownMode.Location = new Point(83, 3);
+            dropdownMode.Location = new Point(80, 3);
+            dropdownMode.Margin = new Padding(0);
             dropdownMode.Name = "dropdownMode";
-            dropdownMode.Size = new Size(114, 33);
+            dropdownMode.Size = new Size(120, 33);
             dropdownMode.TabIndex = 1;
             dropdownMode.Text = "Encrypt";
             dropdownMode.SelectedIndexChanged += dropdownMode_SelectedIndexChanged;
@@ -83,10 +85,12 @@ namespace WindowsForms
             // 
             // textboxKey
             // 
-            textboxKey.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textboxKey.Location = new Point(353, 3);
+            textboxKey.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textboxKey.Font = new Font("Courier New", 9F);
+            textboxKey.Location = new Point(350, 6);
+            textboxKey.Margin = new Padding(0);
             textboxKey.Name = "textboxKey";
-            textboxKey.Size = new Size(252, 31);
+            textboxKey.Size = new Size(261, 28);
             textboxKey.TabIndex = 3;
             // 
             // labelTextDecrypted
@@ -104,20 +108,22 @@ namespace WindowsForms
             // textboxDecryptedText
             // 
             textboxDecryptedText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textboxDecryptedText.Font = new Font("Courier New", 9F);
             textboxDecryptedText.Location = new Point(0, 40);
             textboxDecryptedText.Margin = new Padding(0);
             textboxDecryptedText.Multiline = true;
             textboxDecryptedText.Name = "textboxDecryptedText";
-            textboxDecryptedText.Size = new Size(802, 152);
+            textboxDecryptedText.Size = new Size(805, 132);
             textboxDecryptedText.TabIndex = 5;
             // 
             // textboxEncryptedText
             // 
             textboxEncryptedText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textboxEncryptedText.Font = new Font("Courier New", 9F);
             textboxEncryptedText.Location = new Point(3, 43);
             textboxEncryptedText.Multiline = true;
             textboxEncryptedText.Name = "textboxEncryptedText";
-            textboxEncryptedText.Size = new Size(802, 153);
+            textboxEncryptedText.Size = new Size(805, 133);
             textboxEncryptedText.TabIndex = 7;
             // 
             // labelTextEncrypted
@@ -151,18 +157,21 @@ namespace WindowsForms
             tableMain.AutoSize = true;
             tableMain.ColumnCount = 1;
             tableMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableMain.Controls.Add(tableRow3, 0, 2);
-            tableMain.Controls.Add(tableRow4, 0, 3);
-            tableMain.Controls.Add(tableRow2, 0, 1);
-            tableMain.Controls.Add(tableRow1, 0, 0);
+            tableMain.Controls.Add(tableRow3, 0, 3);
+            tableMain.Controls.Add(tableEncrypted, 0, 4);
+            tableMain.Controls.Add(tableDecrypted, 0, 2);
+            tableMain.Controls.Add(tableRow1, 0, 1);
+            tableMain.Controls.Add(label1, 0, 0);
             tableMain.Location = new Point(12, 12);
+            tableMain.Margin = new Padding(0);
             tableMain.Name = "tableMain";
-            tableMain.RowCount = 4;
+            tableMain.RowCount = 5;
+            tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableMain.Size = new Size(808, 477);
+            tableMain.Size = new Size(811, 477);
             tableMain.TabIndex = 10;
             // 
             // tableRow3
@@ -175,12 +184,12 @@ namespace WindowsForms
             tableRow3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableRow3.Controls.Add(buttonEncryptDecrypt, 0, 0);
             tableRow3.Controls.Add(labelError, 2, 0);
-            tableRow3.Location = new Point(0, 238);
+            tableRow3.Location = new Point(0, 258);
             tableRow3.Margin = new Padding(0);
             tableRow3.Name = "tableRow3";
             tableRow3.RowCount = 1;
             tableRow3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableRow3.Size = new Size(808, 40);
+            tableRow3.Size = new Size(811, 40);
             tableRow3.TabIndex = 8;
             // 
             // labelError
@@ -192,44 +201,44 @@ namespace WindowsForms
             labelError.Location = new Point(140, 0);
             labelError.Margin = new Padding(0);
             labelError.Name = "labelError";
-            labelError.Size = new Size(668, 40);
+            labelError.Size = new Size(671, 40);
             labelError.TabIndex = 10;
             labelError.Text = "ERROR";
             labelError.TextAlign = ContentAlignment.MiddleLeft;
             labelError.Visible = false;
             // 
-            // tableRow4
+            // tableEncrypted
             // 
-            tableRow4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tableRow4.AutoSize = true;
-            tableRow4.ColumnCount = 1;
-            tableRow4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableRow4.Controls.Add(textboxEncryptedText, 0, 1);
-            tableRow4.Controls.Add(labelTextEncrypted, 0, 0);
-            tableRow4.Location = new Point(0, 278);
-            tableRow4.Margin = new Padding(0);
-            tableRow4.Name = "tableRow4";
-            tableRow4.RowCount = 2;
-            tableRow4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tableRow4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableRow4.Size = new Size(808, 199);
-            tableRow4.TabIndex = 9;
+            tableEncrypted.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableEncrypted.AutoSize = true;
+            tableEncrypted.ColumnCount = 1;
+            tableEncrypted.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableEncrypted.Controls.Add(textboxEncryptedText, 0, 1);
+            tableEncrypted.Controls.Add(labelTextEncrypted, 0, 0);
+            tableEncrypted.Location = new Point(0, 298);
+            tableEncrypted.Margin = new Padding(0);
+            tableEncrypted.Name = "tableEncrypted";
+            tableEncrypted.RowCount = 2;
+            tableEncrypted.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableEncrypted.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableEncrypted.Size = new Size(811, 179);
+            tableEncrypted.TabIndex = 9;
             // 
-            // tableRow2
+            // tableDecrypted
             // 
-            tableRow2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tableRow2.AutoSize = true;
-            tableRow2.ColumnCount = 1;
-            tableRow2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableRow2.Controls.Add(textboxDecryptedText, 0, 1);
-            tableRow2.Controls.Add(labelTextDecrypted, 0, 0);
-            tableRow2.Location = new Point(3, 43);
-            tableRow2.Name = "tableRow2";
-            tableRow2.RowCount = 2;
-            tableRow2.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tableRow2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableRow2.Size = new Size(802, 192);
-            tableRow2.TabIndex = 10;
+            tableDecrypted.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableDecrypted.AutoSize = true;
+            tableDecrypted.ColumnCount = 1;
+            tableDecrypted.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableDecrypted.Controls.Add(textboxDecryptedText, 0, 1);
+            tableDecrypted.Controls.Add(labelTextDecrypted, 0, 0);
+            tableDecrypted.Location = new Point(3, 83);
+            tableDecrypted.Name = "tableDecrypted";
+            tableDecrypted.RowCount = 2;
+            tableDecrypted.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableDecrypted.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableDecrypted.Size = new Size(805, 172);
+            tableDecrypted.TabIndex = 10;
             // 
             // tableRow1
             // 
@@ -243,22 +252,22 @@ namespace WindowsForms
             tableRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableRow1.Controls.Add(labelMode, 0, 0);
             tableRow1.Controls.Add(labelKey, 3, 0);
-            tableRow1.Controls.Add(textboxKey, 4, 0);
             tableRow1.Controls.Add(dropdownMode, 1, 0);
             tableRow1.Controls.Add(buttonGenerateKey, 5, 0);
-            tableRow1.Location = new Point(0, 0);
+            tableRow1.Controls.Add(textboxKey, 4, 0);
+            tableRow1.Location = new Point(0, 40);
             tableRow1.Margin = new Padding(0);
             tableRow1.Name = "tableRow1";
             tableRow1.RowCount = 1;
             tableRow1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableRow1.Size = new Size(808, 40);
+            tableRow1.Size = new Size(811, 40);
             tableRow1.TabIndex = 11;
             // 
             // buttonGenerateKey
             // 
             buttonGenerateKey.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             buttonGenerateKey.Font = new Font("Segoe UI", 9F);
-            buttonGenerateKey.Location = new Point(608, 0);
+            buttonGenerateKey.Location = new Point(611, 0);
             buttonGenerateKey.Margin = new Padding(0);
             buttonGenerateKey.Name = "buttonGenerateKey";
             buttonGenerateKey.Size = new Size(200, 40);
@@ -266,6 +275,18 @@ namespace WindowsForms
             buttonGenerateKey.Text = "Generate Random Key";
             buttonGenerateKey.UseVisualStyleBackColor = true;
             buttonGenerateKey.Click += buttonGenerateKey_Click;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.RightToLeft = RightToLeft.No;
+            label1.Size = new Size(109, 40);
+            label1.TabIndex = 10;
+            label1.Text = "v2024.05.26";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // MainForm
             // 
@@ -278,10 +299,10 @@ namespace WindowsForms
             tableMain.ResumeLayout(false);
             tableMain.PerformLayout();
             tableRow3.ResumeLayout(false);
-            tableRow4.ResumeLayout(false);
-            tableRow4.PerformLayout();
-            tableRow2.ResumeLayout(false);
-            tableRow2.PerformLayout();
+            tableEncrypted.ResumeLayout(false);
+            tableEncrypted.PerformLayout();
+            tableDecrypted.ResumeLayout(false);
+            tableDecrypted.PerformLayout();
             tableRow1.ResumeLayout(false);
             tableRow1.PerformLayout();
             ResumeLayout(false);
@@ -300,10 +321,11 @@ namespace WindowsForms
         private TableLayoutPanel tableRow3;
         private Label labelError;
         private TableLayoutPanel tableLayoutPanel3;
-        private TableLayoutPanel tableRow4;
-        private TableLayoutPanel tableRow2;
+        private TableLayoutPanel tableEncrypted;
+        private TableLayoutPanel tableDecrypted;
         private TableLayoutPanel tableRow1;
         private Button buttonGenerateKey;
+        private Label label1;
         private Label labelMode;
 
         private void dropdownMode_SelectedIndexChanged(object sender, EventArgs e)
