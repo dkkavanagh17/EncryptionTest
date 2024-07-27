@@ -39,7 +39,6 @@ namespace WindowsForms
             tableEncrypted = new TableLayoutPanel();
             tableDecrypted = new TableLayoutPanel();
             tableRow1 = new TableLayoutPanel();
-            buttonGenerateKey = new Button();
             label1 = new Label();
             tableMain.SuspendLayout();
             tableRow3.SuspendLayout();
@@ -90,7 +89,7 @@ namespace WindowsForms
             textboxKey.Location = new Point(350, 6);
             textboxKey.Margin = new Padding(0);
             textboxKey.Name = "textboxKey";
-            textboxKey.Size = new Size(261, 28);
+            textboxKey.Size = new Size(461, 28);
             textboxKey.TabIndex = 3;
             // 
             // labelTextDecrypted
@@ -119,11 +118,13 @@ namespace WindowsForms
             // textboxEncryptedText
             // 
             textboxEncryptedText.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textboxEncryptedText.BackColor = SystemColors.Window;
             textboxEncryptedText.Font = new Font("Courier New", 9F);
-            textboxEncryptedText.Location = new Point(3, 43);
+            textboxEncryptedText.Location = new Point(0, 40);
+            textboxEncryptedText.Margin = new Padding(0);
             textboxEncryptedText.Multiline = true;
             textboxEncryptedText.Name = "textboxEncryptedText";
-            textboxEncryptedText.Size = new Size(805, 133);
+            textboxEncryptedText.Size = new Size(811, 139);
             textboxEncryptedText.TabIndex = 7;
             // 
             // labelTextEncrypted
@@ -243,7 +244,7 @@ namespace WindowsForms
             // tableRow1
             // 
             tableRow1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tableRow1.ColumnCount = 6;
+            tableRow1.ColumnCount = 5;
             tableRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
             tableRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableRow1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
@@ -253,7 +254,6 @@ namespace WindowsForms
             tableRow1.Controls.Add(labelMode, 0, 0);
             tableRow1.Controls.Add(labelKey, 3, 0);
             tableRow1.Controls.Add(dropdownMode, 1, 0);
-            tableRow1.Controls.Add(buttonGenerateKey, 5, 0);
             tableRow1.Controls.Add(textboxKey, 4, 0);
             tableRow1.Location = new Point(0, 40);
             tableRow1.Margin = new Padding(0);
@@ -262,19 +262,6 @@ namespace WindowsForms
             tableRow1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableRow1.Size = new Size(811, 40);
             tableRow1.TabIndex = 11;
-            // 
-            // buttonGenerateKey
-            // 
-            buttonGenerateKey.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            buttonGenerateKey.Font = new Font("Segoe UI", 9F);
-            buttonGenerateKey.Location = new Point(611, 0);
-            buttonGenerateKey.Margin = new Padding(0);
-            buttonGenerateKey.Name = "buttonGenerateKey";
-            buttonGenerateKey.Size = new Size(200, 40);
-            buttonGenerateKey.TabIndex = 9;
-            buttonGenerateKey.Text = "Generate Random Key";
-            buttonGenerateKey.UseVisualStyleBackColor = true;
-            buttonGenerateKey.Click += buttonGenerateKey_Click;
             // 
             // label1
             // 
@@ -285,7 +272,7 @@ namespace WindowsForms
             label1.RightToLeft = RightToLeft.No;
             label1.Size = new Size(109, 40);
             label1.TabIndex = 10;
-            label1.Text = "v2024.05.26";
+            label1.Text = "v2024.05.27";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // MainForm
@@ -324,7 +311,6 @@ namespace WindowsForms
         private TableLayoutPanel tableEncrypted;
         private TableLayoutPanel tableDecrypted;
         private TableLayoutPanel tableRow1;
-        private Button buttonGenerateKey;
         private Label label1;
         private Label labelMode;
 
@@ -376,7 +362,7 @@ namespace WindowsForms
             }
 
 
-            XR4.KeyData keyData = XR4.KeyDataFromText(textboxKey.Text);
+            XR4v2024_05_27.KeyData keyData = XR4v2024_05_27.KeyDataFromText(textboxKey.Text);
 
             if (keyData == null)
             {
@@ -385,16 +371,16 @@ namespace WindowsForms
             }
 
 
-            XR4v2024_05_26 xr4 = new XR4v2024_05_26(keyData);
+            XR4v2024_05_27 xr4 = new XR4v2024_05_27(keyData);
             int[] batch;
 
             if (dropdownMode.SelectedIndex == 0) //Encrypt Mode
             {
-                batch = XR4.BatchFromText(textboxDecryptedText.Text);
+                batch = XR4v2024_05_27.BatchFromText(textboxDecryptedText.Text);
             }
             else //Decrypt Mode
             {
-                batch = XR4.BatchFrom8BitHex(textboxEncryptedText.Text);
+                batch = XR4v2024_05_27.BatchFrom8BitHex(textboxEncryptedText.Text);
             }
 
             if (batch == null)
@@ -419,7 +405,7 @@ namespace WindowsForms
             {
                 batch = xr4.Encrypt(batch);
 
-                output_data = XR4.BatchTo8BitHex(batch);
+                output_data = XR4v2024_05_27.BatchTo8BitHex(batch);
 
                 textboxEncryptedText.Text = output_data;
             }
@@ -427,7 +413,7 @@ namespace WindowsForms
             {
                 batch = xr4.Decrypt(batch);
 
-                output_data = XR4.BatchToText(batch);
+                output_data = XR4v2024_05_27.BatchToText(batch);
 
                 textboxDecryptedText.Text = output_data;
             }
@@ -442,12 +428,6 @@ namespace WindowsForms
         {
             labelError.Visible = enabled;
             labelError.Text = text;
-        }
-
-        private void buttonGenerateKey_Click(object sender, EventArgs e)
-        {
-            XR4.KeyData keyData = XR4.GenerateRandomKeyData();
-            textboxKey.Text = XR4.KeyDataToText(keyData);
         }
     }
 }

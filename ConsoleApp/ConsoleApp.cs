@@ -21,13 +21,13 @@ public class ConsoleApp
     static int[] batch = new int[0];
     static string input_data = "";
     static string output_data = "";
-    static XR4.KeyData keyData;
+    static XR4v2024_05_26.KeyData keyData;
     static XR4v2024_05_26 xr4;
 
 
     static void StartText()
     {
-        Console.WriteLine("XR4 Encryption Program");
+        Console.WriteLine("XR4v2024_05_26 Encryption Program");
         Console.WriteLine("v2024.05.26");
         Console.WriteLine(new string('-', 10));
     }
@@ -74,7 +74,7 @@ public class ConsoleApp
 
         if (mode == "e")
         {
-            batch = XR4.BatchFromText(input_data);
+            batch = XR4v2024_05_26.BatchFromText(input_data);
 
             if (batch == null)
             {
@@ -84,12 +84,12 @@ public class ConsoleApp
 
             batch = xr4.Encrypt(batch);
 
-            output_data = XR4.BatchTo8BitHex(batch);
+            output_data = XR4v2024_05_26.BatchTo8BitHex(batch);
         }
         else
         {
 
-            batch = XR4.BatchFrom8BitHex(input_data);
+            batch = XR4v2024_05_26.BatchFrom8BitHex(input_data);
 
             if (batch == null)
             {
@@ -99,7 +99,7 @@ public class ConsoleApp
 
             batch = xr4.Decrypt(batch);
 
-            output_data = XR4.BatchToText(batch);
+            output_data = XR4v2024_05_26.BatchToText(batch);
         }
 
         //Output
@@ -142,7 +142,7 @@ public class ConsoleApp
     {
         string ipt_key = GetInput("key", "[int]:[8bit (2 digit) hex]");
 
-        keyData = XR4.KeyDataFromText(ipt_key);
+        keyData = XR4v2024_05_26.KeyDataFromText(ipt_key);
         if (keyData == null)
         {
             Console.WriteLine(red + "invalid key" + reset);

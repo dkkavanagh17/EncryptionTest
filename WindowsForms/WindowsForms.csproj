@@ -6,8 +6,7 @@
         <TargetFramework>net8.0-windows</TargetFramework>
 
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-        <PublishSingleFile>true</PublishSingleFile>
-        <SelfContained>true</SelfContained>
+        <!--PublishSingleFile>true</PublishSingleFile> <SelfContained>true</SelfContained-->
 
         <UseWindowsForms>true</UseWindowsForms>
 
@@ -24,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="..\XR4Encryption\XR4.cs" />
+        <Compile Remove="..\XR4Encryption\XR4.cs" />
     </ItemGroup>
 
     <ItemGroup>

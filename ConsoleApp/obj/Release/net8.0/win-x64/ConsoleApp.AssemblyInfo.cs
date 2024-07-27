@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XR4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+086de09cb4b29aabe796627e936ec3dd8344dae5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf9912c627ed7d08a8adbff1dde6c0654e3b9ad9")]
 [assembly: System.Reflection.AssemblyProductAttribute("XR4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XR4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
